@@ -1,6 +1,5 @@
 <template>
-  <AdminHeader />
-  <AdminSider />
+  <AdminHeaderWithSider />
   <main class="pl-40 h-full flex flex-col pt-11">
     <div>
       <h2 class="font-semibold text-lg px-3 py-2">員工群組</h2>
@@ -30,6 +29,7 @@
                     v-model="groupDetail.name"
                     type="text"
                     id="groupName"
+                    class="pl-2"
                   >
                 </div>
                 <div class="flex flex-col">
@@ -40,6 +40,7 @@
                     v-model="groupDetail.pointBaseLine"
                     type="number"
                     id="pointBaseLine"
+                    class="pl-2"
                   >
                 </div>
               </form>
@@ -176,6 +177,7 @@
 
 <script setup>
 import fetchWithToken from '@utils/fetchFn'
+import alertResult from '@utils/alertResult'
 
 const memberGroups = ref([])
 const groupDetail = reactive({
@@ -192,50 +194,19 @@ const fetchMemberGroup = async () => {
 fetchMemberGroup()
 
 const addGroup = async () => {
-  try {
-    if (!groupDetail.name) {
-      throw new Error('員工群組名稱不能為空白')
-    }
-    const response = await fetch('https://dispatch-net.onrender.com/api/groups', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTcwMzE1MjE1NywiZXhwIjoxNzA1NzQ0MTU3fQ.6MnItXMM70Ce-24W6x1TNSVsko7VR_GcmSZggMQjq9A',
-      },
-      body: JSON.stringify({
-        data: {
-          name: groupDetail.name,
-          point_baseline: groupDetail.pointBaseLine
-        }
-      })
-    })
-    const { data } = await response.json()
-    const { id } = data
-    const { name, point_baseline, isDefault } = data.attributes
-
-    if (!data) {
-      throw new Error('新增群組失敗')
-    }
-
-    memberGroups.value.push({
-      id,
-      attributes: {
-        name,
-        point_baseline,
-        isDefault,
-        users: {
-          data: {
-            attributes: {
-              count: 0,
-            },
-          },
-        },
-      },
-    })
-  } catch (err) {
-    console.log(err)
+  if (!groupDetail.name) {
+    alert('員工群組名稱不能為空白')
+    throw new Error('員工群組名稱不能為空白')
   }
+  const { data } = await fetchWithToken('/api/groups', 'POST', {
+    data: {
+      name: groupDetail.name,
+      point_baseline: groupDetail.pointBaseLine
+    }
+  })
 
+  alertResult(data.id, '新增群組')
+  fetchMemberGroup()
 }
 
 const toGroupDetail = (name, pointBaseLine, isDefault) => {
@@ -246,62 +217,27 @@ const toGroupDetail = (name, pointBaseLine, isDefault) => {
 }
 
 const editGroup = async (id) => {
-  try {
-    const response = await fetch(`https://dispatch-net.onrender.com/api/groups/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTcwMzE1MjE1NywiZXhwIjoxNzA1NzQ0MTU3fQ.6MnItXMM70Ce-24W6x1TNSVsko7VR_GcmSZggMQjq9A',
-      },
-      body: JSON.stringify({
-        data: {
-          name: groupDetail.name,
-          point_baseline: groupDetail.pointBaseLine,
-          isDefault: groupDetail.isDefault
-        }
-      })
-    })
-
-    const { data } = await response.json()
-    if (!data) throw new Error('更新群組失敗')
-    const { name, point_baseline, isDefault } = data.attributes
-
-    memberGroups.value = memberGroups.value.map(group => {
-      if (group.id === id) {
-        group.attributes.name = name
-        group.attributes.point_baseline = point_baseline
-        group.attributes.isDefault = isDefault
-      }
-      return group
-    })
-  } catch (err) {
-    console.log(err)
+  if (!groupDetail.name) {
+    alert('員工群組名稱不能為空白')
+    throw new Error('員工群組名稱不能為空白')
   }
 
+  const { data } = await fetchWithToken(`/api/groups/${id}`, 'PUT', {
+    data: {
+      name: groupDetail.name,
+      point_baseline: groupDetail.pointBaseLine
+    }
+  })
+
+  alertResult(data.id, '編輯群組')
+  fetchMemberGroup()
 }
 
 const removeGroup = async (id) => {
-  try {
-    const confirmRemove = confirm('確定刪除群組?')
-
-    if (!confirmRemove) return
-
-    const response = await fetch(`https://dispatch-net.onrender.com/api/groups/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTcwMzE1MjE1NywiZXhwIjoxNzA1NzQ0MTU3fQ.6MnItXMM70Ce-24W6x1TNSVsko7VR_GcmSZggMQjq9A',
-      }
-    })
-    console.log(response)
-    const { data } = await response.json()
-    if (!data) throw new Error('群組刪除失敗')
-
-    memberGroups.value = memberGroups.value.filter(group => group.id !== id)
-
-  } catch (err) {
-    console.log(err)
-  }
+  if (!confirm('確定要刪除群組嗎？')) return
+  const { data } = await fetchWithToken(`/api/groups/${id}`, 'DELETE')
+  alertResult(data.id, '刪除群組')
+  fetchMemberGroup()
 }
 </script>
 

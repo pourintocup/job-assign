@@ -17,8 +17,14 @@
         </div>
         <div class="p-2">
           顯示
-          <select name="" id="listItemsCount">
-            <option value="10" selected>10</option>
+          <select
+            name=""
+            id="listItemsCount"
+          >
+            <option
+              value="10"
+              selected
+            >10</option>
           </select>
           條目
         </div>
@@ -55,8 +61,14 @@
                   1
                 </td>
                 <td>
-                  <select name="" id="">
-                    <option value="1" selected>1</option>
+                  <select
+                    name=""
+                    id=""
+                  >
+                    <option
+                      value="1"
+                      selected
+                    >1</option>
                   </select>
                 </td>
                 <td>
@@ -66,8 +78,14 @@
                   2023-12-16 12:00:02
                 </td>
                 <td>
-                  <select name="" id="productLaunchState">
-                    <option value="1" selected>顯示</option>
+                  <select
+                    name=""
+                    id="productLaunchState"
+                  >
+                    <option
+                      value="1"
+                      selected
+                    >顯示</option>
                   </select>
                 </td>
                 <td>
@@ -83,23 +101,19 @@
                     </button>
                   </div>
                 </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </template>
-  </AdminLayout>
-</template>
+    </div>
+  </template>
+</AdminLayout></template>
 
-<script setup>
-import AdminLayout from '../../components/admin/AdminLayout.vue'
-</script>
 
-<style scoped>
-.filter-table td, .filter-table th, .filter-table {
+<style scoped>.filter-table td,
+.filter-table th,
+.filter-table {
   @apply border-[1px];
   @apply border-gray-400;
   @apply text-center;
-}
-</style>
+}</style>
