@@ -27,6 +27,11 @@ const routes = [
     component: () => import('../views/Announcement.vue')
   },
   {
+    path: '/announcement/:id',
+    name: 'announcementDetail',
+    component: () => import('../views/AnnouncementDetail.vue')
+  },
+  {
     path: '/admin',
     redirect: {
       name: 'AdminMemberGroup',
