@@ -36,6 +36,7 @@ declare module 'vue' {
     UserAnnouncementContent: typeof import('./components/user/AnnouncementContent.vue')['default']
     UserHeader: typeof import('./components/user/Header.vue')['default']
     UserLayout: typeof import('./components/user/Layout.vue')['default']
+    UserMarquee: typeof import('./components/user/Marquee.vue')['default']
     UserMobileMenu: typeof import('./components/user/MobileMenu.vue')['default']
     UserProduct: typeof import('./components/user/Product.vue')['default']
     UserSearchInput: typeof import('./components/user/SearchInput.vue')['default']
