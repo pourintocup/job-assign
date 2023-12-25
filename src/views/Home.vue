@@ -3,6 +3,7 @@
     <div class="my-4 md:hidden">
       <UserSearchInput />
     </div>
+    <UserMarquee />
     <div class="grid md:grid-cols-4 grid-cols-2 gap-8 md:mt-[64px]">
       <UserProduct
         v-for="product in productList"

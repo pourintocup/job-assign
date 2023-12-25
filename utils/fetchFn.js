@@ -1,6 +1,6 @@
 import getToken from '@utils/getToken.js'
 
-export default async function fetchWithToken(url, method = 'get', body = undefined) {
+export default async function fetchWithToken(url, method = 'GET', body = undefined) {
     const baseUrl = import.meta.env.VITE_BACKEND_HOST
     const token = getToken()
 
@@ -20,7 +20,7 @@ export default async function fetchWithToken(url, method = 'get', body = undefin
     }
 }
 
-export async function fetchWithoutToken(url, method = 'get', body = undefined) {
+export async function fetchWithoutToken(url, method = 'GET', body = undefined) {
     const baseUrl = import.meta.env.VITE_BACKEND_HOST
     try {
         const res = await fetch(baseUrl + url, {

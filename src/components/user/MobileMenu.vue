@@ -36,13 +36,28 @@
       :class="navClass"
       @click="connectCustomService"
     >業主專區</div>
+    <div
+      :class="navBorder"
+      v-if="!isLogin"
+    ></div>
+    <router-link
+      v-if="!isLogin"
+      to="/announcement"
+      :class="navClass"
+    >公告欄</router-link>
     <div :class="navBorder"></div>
-    <!-- show wher login -->
+    <div
+      :class="navClass"
+      v-if="!isLogin"
+      @click="connectCustomService"
+    >註冊</div>
+
+    <!-- show when login -->
     <div v-if="isLogin">
       <div
         :class="navClass"
-        @click="router.push('/')"
-      >首頁</div>
+        @click="router.push('/announcement')"
+      >公告欄</div>
       <div :class="navBorder"></div>
       <div
         :class="navClass"
@@ -59,11 +74,8 @@
         @click="logout"
       >登出</div>
     </div>
-    <div
-      :class="navClass"
-      v-if="!isLogin"
-      @click="connectCustomService"
-    >註冊</div>
+
+
   </div>
 </template>
 

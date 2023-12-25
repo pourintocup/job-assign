@@ -1,6 +1,6 @@
 <template>
   <div class="w-full md:h-[100px] h-[70px] border-b flex items-center px-4 md:px-[67px]">
-    <MobileMenu />
+    <UserMobileMenu />
     <img
       src="@/assets/logo.svg"
       alt="logo"
@@ -67,13 +67,13 @@
         >
       </div>
       <!-- announcement -->
-      <img
+      <span
         v-if="route.path !== '/login'"
-        src="@/assets/bell.svg"
-        class="w-6 cursor-pointer"
-        alt="bell"
+        class="text-gray-400 my-auto cursor-pointer whitespace-nowrap hidden md:block"
         @click="router.push('/announcement')"
       >
+        公告欄
+      </span>
       <!-- logout -->
       <span
         v-if="isLogin"
@@ -87,7 +87,7 @@
 </template>
 
 <script setup >
-import fetchWithToken from '../../../utils/fetchFn'
+import fetchWithToken from '@utils/fetchFn'
 
 const connectCustomService = inject('connectCustomService')
 
@@ -105,7 +105,7 @@ onMounted(async () => {
   if (isLogin) {
     const data = await fetchWithToken('/api/users/me?fields[0]=main_point')
     main_point.value = data.main_point
-}
+  }
 })
 
 const logout = () => {

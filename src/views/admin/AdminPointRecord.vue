@@ -15,22 +15,40 @@
                     查詢時間
                   </td>
                   <td>
-                    <label for="todayOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                    <label
+                      for="todayOption"
+                      class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                    >
                       今日
                     </label>
-                    <label for="yesterdayOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                    <label
+                      for="yesterdayOption"
+                      class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                    >
                       昨日
                     </label>
-                    <label for="thisWeekOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                    <label
+                      for="thisWeekOption"
+                      class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                    >
                       本週
                     </label>
-                    <label for="lastWeekOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                    <label
+                      for="lastWeekOption"
+                      class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                    >
                       上週
                     </label>
-                    <label for="thisMonthOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                    <label
+                      for="thisMonthOption"
+                      class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                    >
                       本月
                     </label>
-                    <label for="lastMonthOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                    <label
+                      for="lastMonthOption"
+                      class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                    >
                       上月
                     </label>
                   </td>
@@ -54,12 +72,22 @@
                     </label>
                   </td>
                   <td>
-                    <input id="memberName" type="text" class="w-1/2 mr-2">
+                    <input
+                      id="memberName"
+                      type="text"
+                      class="w-1/2 mr-2"
+                    >
                     <label for="memberGroup">
                       員工群組
                     </label>
-                    <select name="" id="memberGroup">
-                      <option value="0" selected>全部</option>
+                    <select
+                      name=""
+                      id="memberGroup"
+                    >
+                      <option
+                        value="0"
+                        selected
+                      >全部</option>
                     </select>
                   </td>
                 </tr>
@@ -69,21 +97,36 @@
                   </td>
                   <td class="flex gap-4 items-center">
                     <div>
-                      <input id="all" type="radio" name="state" value="all">
+                      <input
+                        id="all"
+                        type="radio"
+                        name="state"
+                        value="all"
+                      >
                       <label for="all">
-                      全部
+                        全部
                       </label>
                     </div>
                     <div>
-                      <input id="addPoint" type="radio" name="state" value="add">
+                      <input
+                        id="addPoint"
+                        type="radio"
+                        name="state"
+                        value="add"
+                      >
                       <label for="addPoint">
-                      補點
+                        補點
                       </label>
                     </div>
                     <div>
-                      <input id="minusPoint" type="radio" name="state" value="minus">
+                      <input
+                        id="minusPoint"
+                        type="radio"
+                        name="state"
+                        value="minus"
+                      >
                       <label for="minusPoint">
-                      扣點
+                        扣點
                       </label>
                     </div>
                     <div>
@@ -114,13 +157,19 @@
             頁 每頁筆數:
             <div>
               <select name="itemsCount">
-                <option value="50" selected>50</option>
+                <option
+                  value="50"
+                  selected
+                >50</option>
               </select>
             </div>
             目前第:
             <div>
               <select name="chosenPage">
-                <option value="1" selected>1</option>
+                <option
+                  value="1"
+                  selected
+                >1</option>
               </select>
             </div>
             頁
@@ -195,7 +244,7 @@
               <tr class="last-row">
                 <td colspan="3"></td>
                 <td colspan="2">
-                  <span  class="inline-block py-3 tracking-[1em] w-full mr-[-1em]">
+                  <span class="inline-block py-3 tracking-[1em] w-full mr-[-1em]">
                     總計
                   </span>
                 </td>
@@ -213,10 +262,6 @@
   </AdminLayout>
 </template>
 
-<script setup>
-import AdminLayout from '../../components/admin/AdminLayout.vue'
-</script>
-
 <style scoped>
 form tr td {
   @apply py-1;
@@ -226,6 +271,7 @@ form tr td:first-child {
   @apply text-right;
   @apply pr-2;
 }
+
 form tr td input[type='text'],
 form tr td input[type='dateTime-local'] {
   @apply border-[1px];
@@ -233,9 +279,10 @@ form tr td input[type='dateTime-local'] {
   @apply h-8;
 }
 
-.filter-table td, .filter-table th, .filter-table {
+.filter-table td,
+.filter-table th,
+.filter-table {
   @apply border-[1px];
   @apply border-gray-400;
   @apply text-center;
-}
-</style>
+}</style>

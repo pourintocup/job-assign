@@ -1,6 +1,5 @@
 <template>
-  <AdminHeader />
-  <AdminSider />
+  <AdminHeaderWithSider />
   <main class="pl-40 h-full flex flex-col pt-11">
     <div class="flex items-center">
       <slot name="header"></slot>

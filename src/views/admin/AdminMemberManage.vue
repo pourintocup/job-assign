@@ -85,7 +85,7 @@
                     <select
                       name=""
                       id="memberGroup"
-                      class="mx-3 w-[70px] text-sm bg-gray-300 p-1 rounded-xl"
+                      class="mx-3 min-w-[70px] text-sm bg-gray-300 p-1 rounded-xl"
                       v-model="memberDetail.group"
                     >
                       <option
@@ -234,7 +234,10 @@
                   {{ member.main_point }}
                 </td>
                 <td>
-                  {{ member.createdAt }}
+                  <div class="flex flex-col  whitespace-nowrap">
+                    <span>{{ formatDate(member.createdAt) }}</span>
+                    <span>{{ formatTime(member.createdAt) }}</span>
+                  </div>
                 </td>
                 <td>
 
@@ -244,7 +247,7 @@
                 </td>
                 <td>
                   <router-link
-                    class="bg-[#2055A5] text-white px-5 py-1"
+                    class="bg-[#2055A5] text-white px-5 py-1 whitespace-nowrap"
                     :to="{ name: 'AdminMember', params: { memberId: member.id } }"
                   >
                     修改
@@ -262,6 +265,7 @@
 <script setup>
 import getFilterQuery from '@utils/getFilterQuery'
 import fetchWithToken, { fetchWithoutToken } from '@utils/fetchFn'
+import { formatDate, formatTime } from '@utils/formatDateTime'
 import qs from 'qs'
 
 const memberDetail = reactive({
@@ -275,7 +279,6 @@ const memberDetail = reactive({
 })
 
 const groupOptions = ref([])
-
 onMounted(async () => {
   const { data } = await fetchWithToken('/api/groups?fields[0]=name&fields[1]=isDefault')
   groupOptions.value = data?.map(group => ({ id: group.id, name: group.attributes.name }))
